@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leitor de Temperatura e Umidade - Time 02</title>
+  <!-- Arquivo de Estilo CSS (Desenvolvimento na Etapa 2) -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Biblioteca Chart.js para o Grafico de Historico (RF06) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Cabecalho Principal do Dashboard -->
+  <header class="header">
+    <h1>Leitor de Temperatura e Umidade</h1>
+    <p>Projeto Trainee EletronJun 2026.2 — Time 02</p>
+  </header>
+
+  <main class="container">
+
+    <!-- SECAO 1: Exibicao dos Dados em Tempo Real (RF02, RF05) -->
+    <section class="card-painel">
+      <h2>Medições Atuais</h2>
+      <div class="cards-grid">
+        <!-- Card de Temperatura -->
+        <div class="card card-temp">
+          <h3>Temperatura</h3>
+          <p class="valor"><span id="temp-valor">--</span> °C</p>
+        </div>
+
+        <!-- Card de Umidade -->
+        <div class="card card-umidade">
+          <h3>Umidade Relativa</h3>
+          <p class="valor"><span id="umidade-valor">--</span> %</p>
+        </div>
+      </div>
+
+      <!-- Indicador de Status do Sensor / Indisponibilidade (NF02) -->
+      <div class="status-container">
+        <p>Status do Sensor: <strong id="status-sensor">Aguardando dados...</strong></p>
+      </div>
+    </section>
+
+    <!-- SECAO 2: Selecao e Indicacao do Modo de Operacao (RF03, RF04) -->
+    <section class="card-painel">
+      <h2>Modo de Operação</h2>
+      <p class="modo-info">Modo Ativo no Hardware: <strong id="modo-ativo">Automático</strong></p>
+
+      <div class="botoes-grupo">
+        <button id="btn-ligado" class="btn btn-ligado">Ligado</button>
+        <button id="btn-desligado" class="btn btn-desligado">Desligado</button>
+        <button id="btn-automatico" class="btn btn-automatico ativo">Automático</button>
+      </div>
+    </section>
+
+    <!-- SECAO 3: Configuracao de Limites de Alerta (RF07, RF08) -->
+    <section class="card-painel">
+      <h2>Configuração de Alertas</h2>
+      <form id="form-limites">
+        <div class="input-grupo">
+          <label for="limite-temp">Limite Máximo Temperatura (°C):</label>
+          <input type="number" id="limite-temp" value="35" step="0.1">
+        </div>
+
+        <div class="input-grupo">
+          <label for="limite-umidade">Limite Máximo Umidade (%):</label>
+          <input type="number" id="limite-umidade" value="70" step="0.1">
+        </div>
+
+        <button type="submit" class="btn btn-salvar">Salvar Limites</button>
+      </form>
+      <div id="painel-alerta" class="alerta-box hidden"></div>
+    </section>
+
+    <!-- SECAO 4: Historico de Medicoes e Grafico (RF06) -->
+    <section class="card-painel">
+      <h2>Histórico de Variação</h2>
+      <div class="grafico-wrapper">
+        <canvas id="graficoHistorico"></canvas>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Script JavaScript (Desenvolvimento nas Etapas 3 e 4) -->
+  <script src="script.js"></script>
+</body>
+</html>
