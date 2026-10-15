@@ -4,22 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leitor de Temperatura e Umidade - Time 02</title>
-  <!-- Arquivo de Estilo CSS (Desenvolvimento na Etapa 2) -->
+  <!-- Arquivo de Estilo CSS (Etapa 2) -->
   <link rel="stylesheet" href="style.css">
-  <!-- Biblioteca Chart.js para o Grafico de Historico (RF06) -->
+  <!-- Biblioteca Chart.js para o Gráfico de Histórico (RF06) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-  <!-- Cabecalho Principal do Dashboard -->
+  <!-- Cabeçalho Principal com Status de Conexão Wi-Fi / IP do ESP32 -->
   <header class="header">
     <h1>Leitor de Temperatura e Umidade</h1>
     <p>Projeto Trainee EletronJun 2026.2 — Time 02</p>
+    
+    <!-- BARRA DE CONEXÃO E REDE -->
+    <div class="conexao-bar">
+      <span>Status Wi-Fi: <strong id="wifi-status">Conectando...</strong></span> | 
+      <span>IP da Placa: <strong id="esp-ip">--.--.--.--</strong></span>
+    </div>
   </header>
 
   <main class="container">
 
-    <!-- SECAO 1: Exibicao dos Dados em Tempo Real (RF02, RF05) -->
+    <!-- SEÇÃO 1: Exibição dos Dados em Tempo Real (RF02, RF05) -->
     <section class="card-painel">
       <h2>Medições Atuais</h2>
       <div class="cards-grid">
@@ -36,25 +42,53 @@
         </div>
       </div>
 
-      <!-- Indicador de Status do Sensor / Indisponibilidade (NF02) -->
+      <!-- Indicador de Status da Leitura / Indisponibilidade (NF02) -->
       <div class="status-container">
-        <p>Status do Sensor: <strong id="status-sensor">Aguardando dados...</strong></p>
+        <p>Status da Leitura: <strong id="status-sensor">Aguardando dados...</strong></p>
       </div>
     </section>
 
-    <!-- SECAO 2: Selecao e Indicacao do Modo de Operacao (RF03, RF04) -->
+    <!-- SEÇÃO 2: Seleção de Modo, Leitura Sob Demanda e Monitor de LEDs Azuis (RF03, RF04) -->
     <section class="card-painel">
-      <h2>Modo de Operação</h2>
+      <h2>Modo de Operação e Controle de Hardware</h2>
       <p class="modo-info">Modo Ativo no Hardware: <strong id="modo-ativo">Automático</strong></p>
 
+      <!-- Botões de Seleção do Modo de Operação -->
       <div class="botoes-grupo">
-        <button id="btn-ligado" class="btn btn-ligado">Ligado</button>
+        <button id="btn-ligado" class="btn btn-ligado">Ligado (Manual)</button>
         <button id="btn-desligado" class="btn btn-desligado">Desligado</button>
         <button id="btn-automatico" class="btn btn-automatico ativo">Automático</button>
       </div>
+
+      <!-- Ação de Leitura Sob Demanda (Exclusiva do Modo Ligado) -->
+      <div class="leitura-demanda-container">
+        <button id="btn-solicitar-leitura" class="btn btn-solicitar" disabled>
+          Solicitar Nova Leitura
+        </button>
+        <small class="dica-leitura">*Disponível apenas quando o Modo Ligado estiver ativo.</small>
+      </div>
+
+      <!-- Painel do Estado dos LEDs Azuis Físicos do Circuito -->
+      <div class="leds-panel">
+        <h3>Status dos LEDs Azuis Físicos (ESP32)</h3>
+        <div class="leds-grid">
+          <div class="led-item">
+            <span id="led-azul-1" class="led-indicador off"></span>
+            <span>LED 1: Modo Desligado</span>
+          </div>
+          <div class="led-item">
+            <span id="led-azul-2" class="led-indicador off"></span>
+            <span>LED 2: Modo Automático</span>
+          </div>
+          <div class="led-item">
+            <span id="led-azul-3" class="led-indicador off"></span>
+            <span>LED 3: Leitura Sob Demanda</span>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- SECAO 3: Configuracao de Limites de Alerta (RF07, RF08) -->
+    <!-- SEÇÃO 3: Configuração de Limites de Alerta (RF07, RF08) -->
     <section class="card-painel">
       <h2>Configuração de Alertas</h2>
       <form id="form-limites">
@@ -73,7 +107,7 @@
       <div id="painel-alerta" class="alerta-box hidden"></div>
     </section>
 
-    <!-- SECAO 4: Historico de Medicoes e Grafico (RF06) -->
+    <!-- SEÇÃO 4: Histórico de Medições e Gráfico (RF06) -->
     <section class="card-painel">
       <h2>Histórico de Variação</h2>
       <div class="grafico-wrapper">
@@ -83,7 +117,7 @@
 
   </main>
 
-  <!-- Script JavaScript (Desenvolvimento nas Etapas 3 e 4) -->
+  <!-- Script JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
