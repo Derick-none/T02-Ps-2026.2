@@ -1,0 +1,385 @@
+/* ==========================================================================
+   1. CONFIGURAÇÕES GERAIS E RESET
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f6;
+  color: #333333;
+  line-height: 1.6;
+  padding-bottom: 50px;
+}
+
+/* ==========================================================================
+   2. CABEÇALHO (HEADER) E BARRA DE CONEXÃO
+   ========================================================================== */
+.header {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #ffffff;
+  text-align: center;
+  padding: 2.2rem 1rem 1.5rem 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0; /* Quinas quadradas */
+}
+
+.header h1 {
+  font-size: 1.9rem;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.5px;
+}
+
+.header p {
+  font-size: 1rem;
+  opacity: 0.85;
+  margin-bottom: 12px;
+}
+
+/* Barra de Status Wi-Fi e IP */
+.conexao-bar {
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 6px 16px;
+  font-size: 0.88rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0; /* Quinas quadradas */
+}
+
+.conexao-bar strong {
+  color: #60a5fa;
+}
+
+/* ==========================================================================
+   3. LAYOUT PRINCIPAL (EFEITO DE CORTE/ROLAGEM TIPO NETFLIX)
+   ========================================================================== */
+.container {
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px; /* Espaçamento vertical expandido para sinalizar a rolagem */
+}
+
+/* Estilo Base dos Cards - Quinas Quadradas */
+.card-painel {
+  background-color: #ffffff;
+  border-radius: 0; /* Quinas quadradas */
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.card-painel h2 {
+  font-size: 1.3rem;
+  color: #1e3c72;
+  margin-bottom: 18px;
+  border-bottom: 2px solid #eef2f5;
+  padding-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   4. CARDS DE MEDIÇÃO EM TEMPO REAL (RF02, RF05)
+   ========================================================================== */
+.cards-grid {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  min-width: 220px;
+  background-color: #f8fafc;
+  border-radius: 0; /* Quinas quadradas */
+  padding: 22px;
+  text-align: center;
+  border-left: 6px solid #cbd5e1;
+}
+
+.card-temp {
+  border-left-color: #ff6b6b; /* Laranja/Vermelho para Temperatura */
+}
+
+.card-umidade {
+  border-left-color: #3b82f6; /* Azul para Umidade */
+}
+
+.card h3 {
+  font-size: 1.05rem;
+  color: #64748b;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.card .valor {
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.status-container {
+  margin-top: 18px;
+  padding: 12px;
+  background-color: #e2e8f0;
+  border-radius: 0; /* Quinas quadradas */
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.status-container strong {
+  color: #2563eb;
+}
+
+/* ==========================================================================
+   5. BOTÕES DO MODO DE OPERAÇÃO E CONTROLE DE HARDWARE (RF03, RF04)
+   ========================================================================== */
+.modo-info {
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.botoes-grupo {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 2px solid transparent;
+  border-radius: 0; /* Quinas quadradas */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  background-color: #e2e8f0;
+  color: #334155;
+  text-transform: uppercase;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-ligado:hover,
+.btn-ligado.ativo {
+  background-color: #22c55e;
+  color: #ffffff;
+  border-color: #15803d;
+}
+
+.btn-desligado:hover,
+.btn-desligado.ativo {
+  background-color: #ef4444;
+  color: #ffffff;
+  border-color: #b91c1c;
+}
+
+.btn-automatico:hover,
+.btn-automatico.ativo {
+  background-color: #3b82f6;
+  color: #ffffff;
+  border-color: #1d4ed8;
+}
+
+.btn.ativo {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Leitura Sob Demanda (Modo Ligado) */
+.leitura-demanda-container {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px dashed #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-solicitar {
+  background-color: #0284c7;
+  color: #ffffff;
+  border-color: #0369a1;
+  width: 100%;
+}
+
+.btn-solicitar:hover:not(:disabled) {
+  background-color: #0369a1;
+}
+
+.btn-solicitar:disabled {
+  background-color: #cbd5e1;
+  color: #94a3b8;
+  border-color: #cbd5e1;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.dica-leitura {
+  font-size: 0.82rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+/* Painel de Monitoramento dos LEDs Azuis Físicos */
+.leds-panel {
+  margin-top: 22px;
+  padding: 16px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0; /* Quinas quadradas */
+}
+
+.leds-panel h3 {
+  font-size: 0.95rem;
+  color: #475569;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.leds-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.led-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* Indicadores Luminosos Retangulares (Quinas Quadradas) */
+.led-indicador {
+  width: 14px;
+  height: 14px;
+  border: 1px solid #64748b;
+  border-radius: 0; /* Quinas quadradas */
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.led-indicador.off {
+  background-color: #cbd5e1;
+  box-shadow: none;
+}
+
+.led-indicador.on {
+  background-color: #00d2ff;
+  border-color: #0088cc;
+  box-shadow: 0 0 10px #00d2ff; /* Efeito Neon do LED aceso */
+}
+
+/* ==========================================================================
+   6. FORMULÁRIO DE LIMITES DE ALERTA (RF08)
+   ========================================================================== */
+#form-limites {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.input-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-grupo label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.input-grupo input {
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 0; /* Quinas quadradas */
+  font-size: 1rem;
+}
+
+.input-grupo input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.btn-salvar {
+  background-color: #1e293b;
+  color: #ffffff;
+  align-self: flex-start;
+  min-width: 160px;
+  border-radius: 0; /* Quinas quadradas */
+}
+
+.btn-salvar:hover {
+  background-color: #0f172a;
+}
+
+.alerta-box {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 0; /* Quinas quadradas */
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.alerta-box.critico {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ==========================================================================
+   7. ÁREA DO GRÁFICO DE HISTÓRICO (RF06)
+   ========================================================================== */
+.grafico-wrapper {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+/* ==========================================================================
+   8. RESPONSIVIDADE (DISPOSITIVOS MÓVEIS)
+   ========================================================================== */
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .conexao-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cards-grid,
+  .botoes-grupo,
+  .leds-grid {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn,
+  .btn-salvar,
+  .btn-solicitar {
+    width: 100%;
+  }
+}
